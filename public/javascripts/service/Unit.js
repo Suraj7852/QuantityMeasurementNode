@@ -38,12 +38,24 @@ class Unit {
             this.converterArray[0] = weightObj.find(o => o.type == data.unitType).values;
             this.converterArray[1] = weightObj.find(o => o.type == data.convertTo).values;
             callback(null, this.converterArray);
+        }
+
+        if (data.type == Type.Temperature) {
+            let temperatureObj = [
+                {"type": "CELSIUS"},
+                {"type": "FAHRENHEIT"}
+            ];
+            let value = temperatureObj.find(o => o.type == data.convertTo).type;
+            if (data.unitType == value)
+                callback(null, data.value * (9 / 5) + 32);
+            else
+                callback(null, (data.value - 32) * (5 / 9));
         } else
             callback({message: "Invalid Type"});
     }
 }
 
 const Type = {
-    Length: "Length", Volume: "Volume", Weight:"Weight"
+    Length: "Length", Volume: "Volume", Weight:"Weight", Temperature:"Temperature"
 };
 module.exports = new Unit();
