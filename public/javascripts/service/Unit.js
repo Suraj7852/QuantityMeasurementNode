@@ -17,6 +17,17 @@ class Unit {
             this.converterArray[1] = lengthObj.find(o => o.type == data.convertTo).values;
             callback(null, this.converterArray);
         }
+
+        if (data.type == Type.Volume) {
+            let volumeObj = [
+                {"type": "GALLON", "values": 3780},
+                {"type": "LITRE", "values": 1000},
+                {"type": "MILILITRE", "values": 1}
+            ];
+            this.converterArray[0] = volumeObj.find(o => o.type == data.unitType).values;
+            this.converterArray[1] = volumeObj.find(o => o.type == data.convertTo).values;
+            callback(null, this.converterArray);
+        }
         else
             callback({message:"Invalid Type"});
     }
