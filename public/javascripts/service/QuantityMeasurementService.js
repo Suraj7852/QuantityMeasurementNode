@@ -7,7 +7,7 @@ class QuantityMeasurementService {
                 callback(err);
             else {
                 if (data.type == "Temperature")
-                    callback(null,result);
+                    callback(null,{message: `converted ${data.unitType} to ${data.convertTo}`, result: result});
                 else{
                     let value = data.value * result[0] / result[1];
                     callback(null, {message: `converted ${data.unitType} to ${data.convertTo}`, result: value});
